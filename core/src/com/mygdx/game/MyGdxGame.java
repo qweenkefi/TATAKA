@@ -14,6 +14,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.screens.ScreenGame;
 import com.mygdx.game.screens.ScreenMenu;
 
+import static com.mygdx.game.GameSettings.STEP_TIME;
+
 
 public class MyGdxGame extends Game {
 	public ScreenGame screenGame;
