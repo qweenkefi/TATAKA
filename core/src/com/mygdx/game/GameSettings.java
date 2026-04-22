@@ -8,4 +8,6 @@ public class GameSettings {
     public static final float GROUND_Y = 0;
     public static final float GROUND_WIDTH = 25f;
     public static final float GROUND_HEIGHT = 2f;
+    public static final int VELOCITY_ITERATIONS = 6;
+    public static final int POSITION_ITERATIONS = 6;
 }
