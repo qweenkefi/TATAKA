@@ -4,7 +4,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.objects.MovingBackground;
+import components.MovingBackground;
+
 
 public class ScreenMenu implements Screen {
     Texture texture;

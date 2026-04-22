@@ -2,7 +2,8 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Screen;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.objects.MovingBackground;
+import components.MovingBackground;
+
 
 public class ScreenGame implements Screen {
     private MyGdxGame myGdxGame;
