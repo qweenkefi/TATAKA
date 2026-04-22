@@ -11,6 +11,7 @@ public class ScreenGame implements Screen {
 
     public ScreenGame (MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;
+        background = new MovingBackground("backgrounds/forestBackgroundOne.png");
 
 
     }
@@ -21,6 +22,9 @@ public class ScreenGame implements Screen {
 
     @Override
     public void render(float delta) {
+        background.move();
+        background.draw(myGdxGame.batch);
+        myGdxGame.batch.end();
 
     }
 
