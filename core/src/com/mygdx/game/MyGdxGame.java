@@ -14,14 +14,12 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.screens.ScreenGame;
 import com.mygdx.game.screens.ScreenMenu;
 
-import static com.mygdx.game.GameSettings.STEP_TIME;
+import static com.mygdx.game.GameSettings.*;
 
 
 public class MyGdxGame extends Game {
 	public ScreenGame screenGame;
 	public ScreenMenu screenMenu;
-	public static final int SRC_WIDTH = 1280;
-	public static final int SRC_HEIGHT = 720;
 	public OrthographicCamera camera;
 	public Batch batch;
 	public World world;
