@@ -10,7 +10,7 @@ import components.MovingBackground;
 public class ScreenMenu implements Screen {
     Texture texture;
     MovingBackground background;
-    MyGdxGame myGdxGame;
+     private MyGdxGame myGdxGame;
     public ScreenMenu(MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;
         background = new MovingBackground("backgrounds/menuBackground.png");
