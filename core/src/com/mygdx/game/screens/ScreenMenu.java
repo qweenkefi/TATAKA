@@ -2,7 +2,9 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.objects.MovingBackground;
 
 public class ScreenMenu implements Screen {
     Texture texture;
@@ -21,7 +23,13 @@ public class ScreenMenu implements Screen {
 
     @Override
     public void render(float delta) {
+        ScreenUtils.clear(1, 0, 0, 1);
+        myGdxGame.camera.update();
+        myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
+        myGdxGame.batch.begin();
+        background.draw(myGdxGame.batch);
 
+        myGdxGame.batch.end();
     }
 
     @Override
