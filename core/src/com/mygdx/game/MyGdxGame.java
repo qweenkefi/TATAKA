@@ -25,6 +25,7 @@ public class MyGdxGame extends Game {
 		camera.setToOrtho(false, SRC_WIDTH, SRC_HEIGHT);
 
 		screenMenu = new ScreenMenu(this);
+		screenGame = new ScreenGame(this);
 		setScreen(screenMenu);
 	}
 

@@ -1,4 +1,46 @@
 package com.mygdx.game.screens;
 
-public class ScreenGame {
+import com.badlogic.gdx.Screen;
+import com.mygdx.game.MyGdxGame;
+
+public class ScreenGame implements Screen {
+    private MyGdxGame myGdxGame;
+
+    public ScreenGame (MyGdxGame myGdxGame){
+
+    }
+    @Override
+    public void show() {
+
+    }
+
+    @Override
+    public void render(float delta) {
+
+    }
+
+    @Override
+    public void resize(int width, int height) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
+
+    @Override
+    public void dispose() {
+
+    }
 }
