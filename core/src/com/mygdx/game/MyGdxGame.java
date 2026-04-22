@@ -20,8 +20,10 @@ import static com.mygdx.game.GameSettings.*;
 public class MyGdxGame extends Game {
 	public ScreenGame screenGame;
 	public ScreenMenu screenMenu;
+
+	public SpriteBatch batch;
 	public OrthographicCamera camera;
-	public Batch batch;
+
 	public World world;
 	public Vector3 touch;
 	float accumulator = 0;
@@ -54,6 +56,8 @@ public class MyGdxGame extends Game {
 	
 	@Override
 	public void dispose () {
-
+		batch.dispose();
 	}
+
+
 }
