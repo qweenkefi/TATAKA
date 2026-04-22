@@ -32,6 +32,7 @@ public class ScreenGame implements Screen {
 
         background.draw(myGdxGame.batch);
         myGdxGame.batch.end();
+        // eeeff
 
     }
 
