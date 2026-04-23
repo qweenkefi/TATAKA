@@ -41,10 +41,6 @@ public class MyGdxGame extends Game {
 		setScreen(screenMenu);
 	}
 
-	@Override
-	public void render () {
-	}
-
 	public void stepWorld() {
 		float delta = Gdx.graphics.getDeltaTime();
 		accumulator += delta;
