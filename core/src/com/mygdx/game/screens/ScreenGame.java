@@ -1,5 +1,6 @@
 package com.mygdx.game.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -27,6 +28,9 @@ public class ScreenGame implements Screen {
 
     @Override
     public void render(float delta) {
+        if (Gdx.input.justTouched()) {
+            anjeObject.onClick();
+        }
         background.move();
         ScreenUtils.clear(1, 0, 0, 1);
         myGdxGame.camera.update();
