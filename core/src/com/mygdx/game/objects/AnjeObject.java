@@ -1,11 +1,11 @@
 package com.mygdx.game.objects;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class AnjeOblect {
+public class AnjeObject {
     int x, y;
     int width, height;
-    Texture texture;
     int speed;
     int jumpHeight;
     final int maxHeightOfJump = 200;
@@ -13,19 +13,23 @@ public class AnjeOblect {
     int frameCounter;
     Texture[] framesArray;
 
-    public AnjeOblect(int x, int y, Texture texture, int speed) {
+    public AnjeObject(int x, int y, int speed) {
         this.x = x;
         this.y = y;
-        this.texture = texture;
         this.speed = speed;
         frameCounter = 0;
         this.width = 200;
-        this.height = 200;
+        this.height = 500;
 
         framesArray = new Texture[]{
                 new Texture("AnjeSprites/Anje0.png"),
-                new Texture("AnjeSprites/Anje11.png"),
+                new Texture("AnjeSprites/Anje1.png"),
         };
+    }
+
+    public void onClick(){
+        jump = true;
+        jumpHeight = maxHeightOfJump + y;
     }
 
     public void jump(){
@@ -37,5 +41,11 @@ public class AnjeOblect {
         } else{
             y -= speed;
         }
+    }
+
+    public void draw(SpriteBatch batch) {
+        int frameMultiplier = 10;
+        batch.draw(framesArray[frameCounter/frameMultiplier],x,y,width,height);
+        if (frameCounter++ == framesArray.length * frameMultiplier - 1) frameCounter = 0;
     }
 }
