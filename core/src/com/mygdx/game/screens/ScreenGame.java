@@ -1,13 +1,17 @@
 package com.mygdx.game.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.objects.AnjeObject;
 import components.MovingBackground;
 
 
 public class ScreenGame implements Screen {
-    private MyGdxGame myGdxGame;
+    MyGdxGame myGdxGame;
+    AnjeObject anjeObject;
 
     MovingBackground background;
 
@@ -19,11 +23,14 @@ public class ScreenGame implements Screen {
     }
     @Override
     public void show() {
-
+        this.anjeObject = new AnjeObject(1,50,10);
     }
 
     @Override
     public void render(float delta) {
+        if (Gdx.input.justTouched()) {
+            anjeObject.onClick();
+        }
         background.move();
         ScreenUtils.clear(1, 0, 0, 1);
         myGdxGame.camera.update();
@@ -31,8 +38,8 @@ public class ScreenGame implements Screen {
         myGdxGame.batch.begin();
 
         background.draw(myGdxGame.batch);
+        anjeObject.draw(myGdxGame.batch);
         myGdxGame.batch.end();
-        // eeeff
 
     }
 

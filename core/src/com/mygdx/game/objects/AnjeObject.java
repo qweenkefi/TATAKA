@@ -19,8 +19,8 @@ public class AnjeOblect {
         this.texture = texture;
         this.speed = speed;
         frameCounter = 0;
-        this.width = 100;
-        this.height = 100;
+        this.width = 200;
+        this.height = 200;
 
         framesArray = new Texture[]{
                 new Texture("AnjeSprites/Anje0.png"),
