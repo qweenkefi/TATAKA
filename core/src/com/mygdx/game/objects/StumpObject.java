@@ -17,17 +17,18 @@ public class StumpObject extends GameObject{
     Texture NORMAL_STUMP_IMAGE;
     boolean isPointReceived;
     Random random;
-    int distanceBetweenStumps;
+    int distanceBetweenStumps = 2;
     int x = SRC_WIDTH + distanceBetweenStumps;
     int y = 300;
     int width = 200;
     int height = 250;
     int speed = 10;
     int stumpsCount;
-    StumpObject(String texturePath, int width, int height, int x, int y, short cBits, World world) {
-        super(texturePath, width, height, x, y, cBits, world);
+    StumpObject(int stumpsCount, int number, World world) {
+        super("stump.pmg", width, hgreight, x, y, GameSettings.STUMP_BIT, world);
         distanceBetweenStumps = (GameSettings.SRC_WIDTH + width) / (stumpsCount - 1);
         random = new Random();
+        this.stumpsCount = stumpsCount;
         isPointReceived = false;
 
     }

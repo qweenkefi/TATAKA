@@ -11,4 +11,5 @@ public class GameSettings {
     public static final float GROUND_HEIGHT = 2f;
     public static final int VELOCITY_ITERATIONS = 6;
     public static final int POSITION_ITERATIONS = 6;
+    public static final short STUMP_BIT = 1;
 }
