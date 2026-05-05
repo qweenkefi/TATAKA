@@ -18,8 +18,8 @@ public class AnjeObject {
         this.y = y;
         this.speed = speed;
         frameCounter = 0;
-        this.width = 200;
-        this.height = 500;
+        this.width = 100;
+        this.height = 250;
 
         framesArray = new Texture[]{
                 new Texture("AnjeSprites/Anje0.png"),
