@@ -2,22 +2,25 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.objects.AnjeObject;
+import com.mygdx.game.objects.StumpObject;
 import components.MovingBackground;
 
 
 public class ScreenGame implements Screen {
     MyGdxGame myGdxGame;
     AnjeObject anjeObject;
-
+    StumpObject[] stumps;
+    int stumpsCount;
     MovingBackground background;
 
     public ScreenGame (MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;
+        stumpsCount = 3;
         background = new MovingBackground("backgrounds/forestBackgroundOne.png");
+        initStumpObject();
 
 
     }
@@ -67,4 +70,11 @@ public class ScreenGame implements Screen {
     public void dispose() {
 
     }
+    void initStumpObject() {
+        stumps = new StumpObject[stumpsCount];
+        for (int i = 0; i < stumpsCount; i++) {
+            stumps[i] = new StumpObject(stumpsCount, i, myGdxGame.world);
+        }
+    }
+
 }
