@@ -1,5 +1,6 @@
 package com.mygdx.game.objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -32,14 +33,14 @@ public class AnjeObject {
         jumpHeight = maxHeightOfJump + y;
     }
 
-    public void jump(){
-        if (y >= jumpHeight) {
+    public void run(){
+        if(y >= jumpHeight){
             jump = false;
         }
-        if (jump) {
+        if(jump){
             y += speed;
-        } else{
-            y -= speed;
+        } else {
+            y = speed;
         }
     }
 

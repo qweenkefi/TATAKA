@@ -38,11 +38,7 @@ public class MyGdxGame extends Game {
 
 		screenMenu = new ScreenMenu(this);
 		screenGame = new ScreenGame(this);
-		setScreen(screenMenu);
-	}
-
-	@Override
-	public void render () {
+		setScreen(screenGame);
 	}
 
 	public void stepWorld() {

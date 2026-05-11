@@ -2,48 +2,76 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.GameResources;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.objects.AnjeObject;
 import com.mygdx.game.objects.StumpObject;
 import components.MovingBackground;
+import components.TextButton;
 
 
 public class ScreenGame implements Screen {
     MyGdxGame myGdxGame;
+   boolean isGameOver;
     AnjeObject anjeObject;
+    StumpObject stumpObject;
     StumpObject[] stumps;
     int stumpsCount;
     MovingBackground background;
+    TextButton buttonStart;
+    private OrthographicCamera camera;
 
-    public ScreenGame (MyGdxGame myGdxGame){
+    public ScreenGame(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        stumpsCount = 3;
-        background = new MovingBackground("backgrounds/forestBackgroundOne.png");
+        isGameOver = false;
+        stumpsCount = 30;
+        background = new MovingBackground(GameResources.BACKGROUND_FONE);
+        buttonStart = new TextButton(400, 400, "Start");
         initStumpObject();
 
 
     }
+
     @Override
     public void show() {
-        this.anjeObject = new AnjeObject(1,50,10);
+        this.anjeObject = new AnjeObject(1, 50, 10);
     }
 
     @Override
     public void render(float delta) {
         if (Gdx.input.justTouched()) {
-            anjeObject.onClick();
+
+            Vector3 touch = myGdxGame.camera.unproject(
+                    new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)
+            );
+
+            if (buttonStart.isHit((int) touch.x, (int) touch.y)) {
+                anjeObject.onClick();
+            }
+            for (StumpObject stump : stumps) {
+                stump.move();
+                if (stump.isHit(anjeObject)) {
+                    System.out.println("HIT");
+                    isGameOver = true;
+                }
+            }
+
+            background.move();
+            anjeObject.run();
+            ScreenUtils.clear(1, 0, 0, 1);
+            myGdxGame.camera.update();
+            myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
+            myGdxGame.batch.begin();
+
+            background.draw(myGdxGame.batch);
+            anjeObject.draw(myGdxGame.batch);
+            buttonStart.draw(myGdxGame.batch);
+            stumpObject.draw(myGdxGame.batch);
+            myGdxGame.batch.end();
         }
-        background.move();
-        ScreenUtils.clear(1, 0, 0, 1);
-        myGdxGame.camera.update();
-        myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
-        myGdxGame.batch.begin();
-
-        background.draw(myGdxGame.batch);
-        anjeObject.draw(myGdxGame.batch);
-        myGdxGame.batch.end();
-
     }
 
     @Override
@@ -70,11 +98,11 @@ public class ScreenGame implements Screen {
     public void dispose() {
 
     }
+
     void initStumpObject() {
         stumps = new StumpObject[stumpsCount];
         for (int i = 0; i < stumpsCount; i++) {
             stumps[i] = new StumpObject(stumpsCount, i, myGdxGame.world);
         }
     }
-
 }
