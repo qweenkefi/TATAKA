@@ -3,10 +3,9 @@ package components;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.mygdx.game.GameSettings;
-import com.mygdx.game.MyGdxGame;
 
 
-import static sun.tools.jconsole.inspector.XDataViewer.dispose;
+
 
 public class MovingBackground {
     Texture texture ;

@@ -12,4 +12,8 @@ public class GameSettings {
     public static final int VELOCITY_ITERATIONS = 6;
     public static final int POSITION_ITERATIONS = 6;
     public static final short STUMP_BIT = 1;
+    public static final int ANJE_WIDTH = 100;
+    public static final int ANJE_HEIGHT = 250;
+    public static final int LIK_WIDTH = 100;
+    public static final int LIK_HEIGHT = 240;
 }
