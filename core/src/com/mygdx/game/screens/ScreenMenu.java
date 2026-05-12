@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.GameResources;
+import com.mygdx.game.GameSettings;
 import com.mygdx.game.MyGdxGame;
 import components.ButtonView;
 import components.MovingBackground;
@@ -25,9 +26,10 @@ public class ScreenMenu extends ScreenAdapter {
     public ScreenMenu(MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;
         background = new MovingBackground("backgrounds/menuBackground.png");
-        startButtonView = new ButtonView(-80, 400, 880, 800, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Начать");
-        settingsButtonView = new ButtonView(100, 551, 440, 70, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Настройки");
-        exitButtonView = new ButtonView(140, 456, 440, 70, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Выход");
+        int centerX = GameSettings.SRC_WIDTH / 2;
+        startButtonView = new ButtonView(centerX, 400, 400, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Start   ");
+        settingsButtonView = new ButtonView(centerX, 300, 400, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Settings    ");
+        exitButtonView = new ButtonView(centerX, 200, 400, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Exit    ");
 
 
 

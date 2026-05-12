@@ -9,7 +9,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		config.setTitle("TATAKAA");
+		config.setTitle("Then all timid angels kept away:TTT");
 		new Lwjgl3Application(new MyGdxGame(), config);
 	}
 }
