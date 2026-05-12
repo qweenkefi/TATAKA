@@ -9,7 +9,7 @@ public class AnjeObject {
     int width, height;
     int speed;
     int jumpHeight;
-    final int maxHeightOfJump = 200;
+    final int maxHeightOfJump = 280;
     boolean jump;
     int frameCounter;
     Texture[] framesArray;
@@ -45,7 +45,7 @@ public class AnjeObject {
     }
 
     public void draw(SpriteBatch batch) {
-        int frameMultiplier = 10;
+        int frameMultiplier = 13;
         batch.draw(framesArray[frameCounter/frameMultiplier],x,y,width,height);
         if (frameCounter++ == framesArray.length * frameMultiplier - 1) frameCounter = 0;
     }

@@ -35,6 +35,8 @@ public class ButtonView extends View {
         super(x, y, width, height);
         texture  = new Texture(texturePath);
     }
+
+
     @Override
     public void draw(SpriteBatch batch) {
         batch.draw(texture, x, y, width, height);

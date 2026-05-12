@@ -21,7 +21,7 @@ public class ScreenGame extends ScreenAdapter {
     AnjeObject anjeObject;
     StumpObject stumpObject;
     StumpObject[] stumps;
-    int stumpsCount;
+    int stumpsCount = 3;
     MovingBackground background;
     ButtonView buttonStart;
     private OrthographicCamera camera;
@@ -29,7 +29,6 @@ public class ScreenGame extends ScreenAdapter {
     public ScreenGame(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         isGameOver = false;
-        stumpsCount = 30;
         background = new MovingBackground(GameResources.BACKGROUND_FONE);
         initStumpObject();
 
@@ -44,14 +43,8 @@ public class ScreenGame extends ScreenAdapter {
     @Override
     public void render(float delta) {
         if (Gdx.input.justTouched()) {
-
-            Vector3 touch = myGdxGame.camera.unproject(
-                    new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)
-            );
-
-            if (buttonStart.isHit((int) touch.x, (int) touch.y)) {
-                anjeObject.onClick();
-            }
+            anjeObject.onClick();
+        }
             for (StumpObject stump : stumps) {
                 stump.move();
                 if (stump.isHit(anjeObject)) {
@@ -69,10 +62,10 @@ public class ScreenGame extends ScreenAdapter {
 
             background.draw(myGdxGame.batch);
             anjeObject.draw(myGdxGame.batch);
-            buttonStart.draw(myGdxGame.batch);
-            stumpObject.draw(myGdxGame.batch);
+            for (int i = 0; i < stumpsCount; i++) {
+                stumps[i].draw(myGdxGame.batch);
+            }
             myGdxGame.batch.end();
-        }
     }
 
     @Override
@@ -102,6 +95,7 @@ public class ScreenGame extends ScreenAdapter {
 
     void initStumpObject() {
         stumps = new StumpObject[stumpsCount];
+
         for (int i = 0; i < stumpsCount; i++) {
             stumps[i] = new StumpObject(stumpsCount, i, myGdxGame.world);
         }
