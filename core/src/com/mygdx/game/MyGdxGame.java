@@ -2,9 +2,11 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -13,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.screens.ScreenGame;
 import com.mygdx.game.screens.ScreenMenu;
+import components.FontBuilder;
 
 import static com.mygdx.game.GameSettings.*;
 
@@ -20,6 +23,9 @@ import static com.mygdx.game.GameSettings.*;
 public class MyGdxGame extends Game {
 	public ScreenGame screenGame;
 	public ScreenMenu screenMenu;
+	public BitmapFont commonWhiteFont;
+	public BitmapFont largeWhiteFont;
+	public BitmapFont commonBlackFont;
 
 	public SpriteBatch batch;
 	public OrthographicCamera camera;
@@ -35,6 +41,9 @@ public class MyGdxGame extends Game {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, SRC_WIDTH, SRC_HEIGHT);
+		commonWhiteFont = FontBuilder.generate(24, Color.WHITE, GameResources.FONT_PATH);
+		commonBlackFont = FontBuilder.generate(24, Color.BLACK, GameResources.FONT_PATH);
+		largeWhiteFont = FontBuilder.generate(48, Color.WHITE, GameResources.FONT_PATH);
 
 		screenMenu = new ScreenMenu(this);
 		screenGame = new ScreenGame(this);

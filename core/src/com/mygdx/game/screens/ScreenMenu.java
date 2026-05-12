@@ -4,16 +4,26 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
+import components.ButtonView;
 import components.MovingBackground;
+import components.TextView;
 
 
 public class ScreenMenu implements Screen {
     Texture texture;
     MovingBackground background;
-     private MyGdxGame myGdxGame;
+    MyGdxGame myGdxGame;
+    TextView titleView;
+    ButtonView startButtonView;
+    ButtonView settingsButtonView;
+    ButtonView exitButtonView;
+
     public ScreenMenu(MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;
         background = new MovingBackground("backgrounds/menuBackground.png");
+        startButtonView = new ButtonView(140, 646, 440, 70, myGdxGame.commonBlackFont, GameResources.BUTTON_LONG_BG_IMG_PATH, "start");
+
+
 
     }
 
