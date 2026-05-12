@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.screens.ScreenGame;
 import com.mygdx.game.screens.ScreenMenu;
+import com.mygdx.game.screens.SettingsScreen;
 import components.FontBuilder;
 
 import static com.mygdx.game.GameSettings.*;
@@ -23,6 +24,7 @@ import static com.mygdx.game.GameSettings.*;
 public class MyGdxGame extends Game {
 	public ScreenGame screenGame;
 	public ScreenMenu screenMenu;
+	public SettingsScreen settingsScreen;
 	public BitmapFont commonWhiteFont;
 	public BitmapFont largeWhiteFont;
 	public BitmapFont commonBlackFont;
@@ -47,7 +49,8 @@ public class MyGdxGame extends Game {
 
 		screenMenu = new ScreenMenu(this);
 		screenGame = new ScreenGame(this);
-		setScreen(screenGame);
+		settingsScreen = new SettingsScreen(this);
+		setScreen(screenMenu);
 	}
 
 	public void stepWorld() {

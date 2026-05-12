@@ -2,6 +2,7 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -9,11 +10,12 @@ import com.mygdx.game.GameResources;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.objects.AnjeObject;
 import com.mygdx.game.objects.StumpObject;
+import components.ButtonView;
 import components.MovingBackground;
-import components.TextButton;
 
 
-public class ScreenGame implements Screen {
+
+public class ScreenGame extends ScreenAdapter {
     MyGdxGame myGdxGame;
    boolean isGameOver;
     AnjeObject anjeObject;
@@ -21,7 +23,7 @@ public class ScreenGame implements Screen {
     StumpObject[] stumps;
     int stumpsCount;
     MovingBackground background;
-    TextButton buttonStart;
+    ButtonView buttonStart;
     private OrthographicCamera camera;
 
     public ScreenGame(MyGdxGame myGdxGame) {
@@ -29,7 +31,6 @@ public class ScreenGame implements Screen {
         isGameOver = false;
         stumpsCount = 30;
         background = new MovingBackground(GameResources.BACKGROUND_FONE);
-        buttonStart = new TextButton(400, 400, "Start");
         initStumpObject();
 
 
