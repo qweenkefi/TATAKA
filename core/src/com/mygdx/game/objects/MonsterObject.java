@@ -7,33 +7,30 @@ import com.mygdx.game.GameResources;
 
 import java.util.Random;
 
-import static com.mygdx.game.GameSettings.SRC_HEIGHT;
 import static com.mygdx.game.GameSettings.SRC_WIDTH;
 
-public class StumpObject {
-    int width = 100;
-    int height =180;
+public class MonsterObject extends StumpObject {
+
+    int width = 150;
+    int height =200;
     int speed = 7;
-    Texture textureStump;
-    int gapX;
-    int gapWeigh = 500;
     Random random;
     int padding = 100;
     int x;
+    Texture textureMonster;
 
-    public StumpObject(int stumpsCount, int stumpIdx, World world) {
+    public MonsterObject(int stumpsCount, int stumpIdx, World world) {
+        super(stumpsCount, stumpIdx, world);
 
         random = new Random();
-        textureStump = new Texture(GameResources.NORMAL_STUMP_IMAGE);
+        textureMonster = new Texture(GameResources.NORMAL_STUMP_IMAGE);
 
-        gapX = gapWeigh + padding * 2 + random.nextInt(SRC_WIDTH * (padding + gapWeigh));
+        gapX = (gapWeigh + padding) * 2 + random.nextInt(SRC_WIDTH * (padding + gapWeigh));
         x = stumpIdx + SRC_WIDTH;
-
-
     }
 
     public void draw(Batch batch) {
-        batch.draw(textureStump, x, 0, width, height);
+        batch.draw(textureStump, x, 300, width, height);
     }
 
     public void dispose() {
@@ -48,9 +45,10 @@ public class StumpObject {
         }
     }
 
+
     public boolean isHit(AnjeObject a) {
 
-        if (a.x >= x && a.x <= x + width && a.y >= 0 && a.y <= height) {
+        if (a.x >= x && a.x <= x + width && a.y >= 300 && a.y <= height) {
             return true;
         }
         return false;
