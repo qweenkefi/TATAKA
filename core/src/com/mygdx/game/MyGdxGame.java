@@ -49,6 +49,8 @@ public class MyGdxGame extends Game {
 		commonBlackFont = FontBuilder.generate(55, Color.BLACK, GameResources.FONT_PATH);
 		largeWhiteFont = FontBuilder.generate(48, Color.WHITE, GameResources.FONT_PATH);
 
+		audioManager = new AudioManager();
+
 		screenMenu = new ScreenMenu(this);
 		screenGame = new ScreenGame(this);
 		settingsScreen = new SettingsScreen(this);

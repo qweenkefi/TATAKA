@@ -8,7 +8,8 @@ public class GameResources {
     public static final String BULLET_IMG_PATH = "textures/images/button.png";
     public static final String BLACKOUT_MIDDLE_IMG_PATH = "textures/images/blackout_middle.png";
     public static final String NORMAL_STUMP_IMAGE = "objects/stump_object.png";
-    public static final String SHOOT_SOUND_PATH = "sounds/shoot.mp3";
+    public static final String SHOOT_SOUND_PATH = "textures/sounds/beam.mp3";
+    public static final String GAME_MUSIC_SOUND_PATH = "textures/sounds/TATAKA.mp3";
     public static final String FONT_PATH = "textures/fonts/ofont.ru_Satyr SP.ttf";
 
 }
