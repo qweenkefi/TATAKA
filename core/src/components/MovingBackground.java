@@ -10,7 +10,7 @@ import com.mygdx.game.GameSettings;
 public class MovingBackground {
     Texture texture ;
     int texture1x, texture2x;
-    int speed = 5;
+    int speed = 2;
 
     public MovingBackground(String background){
         texture1x = 0;
