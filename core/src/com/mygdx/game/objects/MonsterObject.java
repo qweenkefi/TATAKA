@@ -17,6 +17,7 @@ public class MonsterObject extends StumpObject {
     Random random;
     int padding = 100;
     int x;
+    int y = 300;
     Texture textureMonster;
 
     public MonsterObject(int stumpsCount, int stumpIdx, World world) {
@@ -30,7 +31,7 @@ public class MonsterObject extends StumpObject {
     }
 
     public void draw(Batch batch) {
-        batch.draw(textureStump, x, 300, width, height);
+        batch.draw(textureStump, x, y, width, height);
     }
 
     public void dispose() {
@@ -48,7 +49,7 @@ public class MonsterObject extends StumpObject {
 
     public boolean isHit(AnjeObject a) {
 
-        if (a.x >= x && a.x <= x + width && a.y >= 300 && a.y <= height) {
+        if (a.x + width >= x && a.x <= x + width && a.y + height >= y && a.y <= y+ height) {
             return true;
         }
         return false;
