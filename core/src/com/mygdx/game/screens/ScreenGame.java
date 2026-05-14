@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.GameResources;
+import com.mygdx.game.GameSettings;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.objects.AnjeObject;
 import com.mygdx.game.objects.BulletObject;
@@ -44,7 +45,7 @@ public class ScreenGame extends ScreenAdapter {
             myGdxGame.touch = myGdxGame.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 
             if (pleeButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                BulletObject.(myGdxGame.screenGame);
+                shoot();
             }
         }
         }
@@ -92,6 +93,15 @@ public class ScreenGame extends ScreenAdapter {
                 monsters[i].draw(myGdxGame.batch);
             }
             myGdxGame.batch.end();
+    }
+
+    private void shoot() {
+        BulletObject bullet = new BulletObject(
+                anjeObject.getX() , anjeObject.getY() + anjeObject.height / 2,
+                GameSettings.BULLET_WIDTH, GameSettings.BULLET_HEIGHT,
+                GameResources.BULLET_IMG_PATH,
+                myGdxGame.world);
+        if (myGdxGame.audioManager.isSoundOn) myGdxGame.audioManager.shootSound.play();
     }
 
     @Override

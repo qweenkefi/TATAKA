@@ -6,7 +6,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class AnjeObject {
     int x, y;
-    int width, height;
+    int width;
+    public int height;
     int speed;
     int jumpHeight;
     final int maxHeightOfJump = 400;
@@ -51,5 +52,21 @@ public class AnjeObject {
         int frameMultiplier = 15;
         batch.draw(framesArray[frameCounter/frameMultiplier],x,y,width,height);
         if (frameCounter++ == framesArray.length * frameMultiplier - 1) frameCounter = 0;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

@@ -17,6 +17,7 @@ import com.mygdx.game.screens.ScreenGame;
 import com.mygdx.game.screens.ScreenMenu;
 import com.mygdx.game.screens.SettingsScreen;
 import components.FontBuilder;
+import managers.AudioManager;
 
 import static com.mygdx.game.GameSettings.*;
 
@@ -34,6 +35,7 @@ public class MyGdxGame extends Game {
 
 	public World world;
 	public Vector3 touch;
+	public AudioManager audioManager;
 	float accumulator = 0;
 
 	@Override
