@@ -59,7 +59,7 @@ public class AnjeObject {
     }
 
     public void setX(int x) {
-        this.x = x;
+        this.x = x + 20;
     }
 
     public int getY() {
@@ -67,6 +67,6 @@ public class AnjeObject {
     }
 
     public void setY(int y) {
-        this.y = y;
+        this.y = y + 20;
     }
 }
