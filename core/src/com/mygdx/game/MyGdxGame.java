@@ -44,13 +44,13 @@ public class MyGdxGame extends Game {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, SRC_WIDTH, SRC_HEIGHT);
 		commonWhiteFont = FontBuilder.generate(24, Color.WHITE, GameResources.FONT_PATH);
-		commonBlackFont = FontBuilder.generate(45, Color.BLACK, GameResources.FONT_PATH);
+		commonBlackFont = FontBuilder.generate(55, Color.BLACK, GameResources.FONT_PATH);
 		largeWhiteFont = FontBuilder.generate(48, Color.WHITE, GameResources.FONT_PATH);
 
 		screenMenu = new ScreenMenu(this);
 		screenGame = new ScreenGame(this);
 		settingsScreen = new SettingsScreen(this);
-		setScreen(screenGame);
+		setScreen(screenMenu);
 	}
 
 	public void stepWorld() {

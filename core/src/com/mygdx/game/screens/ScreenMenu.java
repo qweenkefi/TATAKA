@@ -26,10 +26,10 @@ public class ScreenMenu extends ScreenAdapter {
     public ScreenMenu(MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;
         background = new MovingBackground("backgrounds/menuBackground.png");
-        int centerX = GameSettings.SRC_WIDTH / 2;
-        startButtonView = new ButtonView(centerX, 400, 400, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Start   ");
-        settingsButtonView = new ButtonView(centerX, 300, 400, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Settings    ");
-        exitButtonView = new ButtonView(centerX, 200, 400, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Exit    ");
+        float centerX = (GameSettings.SRC_WIDTH * 2)/7  ;
+        startButtonView = new ButtonView(centerX, 600, 300, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Start");
+        settingsButtonView = new ButtonView(centerX, 400, 300, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Settings");
+        exitButtonView = new ButtonView(centerX, 200, 300, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Exit");
 
 
 
