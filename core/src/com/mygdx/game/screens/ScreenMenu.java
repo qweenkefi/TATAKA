@@ -70,9 +70,4 @@ public class ScreenMenu extends ScreenAdapter {
 }
 
 
-
-    @Override
-    public void dispose() {
-
-    }
 }
