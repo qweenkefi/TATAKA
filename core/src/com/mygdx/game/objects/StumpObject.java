@@ -14,18 +14,17 @@ public class StumpObject {
     int width = 100;
     int height =180;
     int speed = 7;
-    Texture textureDownTube;
+    Texture textureStump;
     int gapX;
     int gapWeigh = 500;
     Random random;
     int padding = 100;
-    int distanceBetweenTubes;
     int x;
 
     public StumpObject(int stumpsCount, int stumpIdx, World world) {
 
         random = new Random();
-        textureDownTube = new Texture(GameResources.NORMAL_STUMP_IMAGE);
+        textureStump = new Texture(GameResources.NORMAL_STUMP_IMAGE);
 
         gapX = gapWeigh + padding * 2 + random.nextInt(SRC_WIDTH * (padding + gapWeigh));
         x = stumpIdx + SRC_WIDTH;
@@ -34,11 +33,11 @@ public class StumpObject {
     }
 
     public void draw(Batch batch) {
-        batch.draw(textureDownTube, x, 0, width, height);
+        batch.draw(textureStump, x, 0, width, height);
     }
 
     public void dispose() {
-        textureDownTube.dispose();
+        textureStump.dispose();
     }
 
     public void move() {

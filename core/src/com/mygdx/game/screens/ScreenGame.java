@@ -19,12 +19,9 @@ public class ScreenGame extends ScreenAdapter {
     MyGdxGame myGdxGame;
    boolean isGameOver;
     AnjeObject anjeObject;
-    StumpObject stumpObject;
     StumpObject[] stumps;
     int stumpsCount = 3;
     MovingBackground background;
-    ButtonView buttonStart;
-    private OrthographicCamera camera;
 
     public ScreenGame(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
