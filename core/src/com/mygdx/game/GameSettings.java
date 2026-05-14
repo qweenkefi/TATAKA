@@ -16,4 +16,9 @@ public class GameSettings {
     public static final int ANJE_HEIGHT = 250;
     public static final int LIK_WIDTH = 100;
     public static final int LIK_HEIGHT = 240;
+    public static int BULLET_VELOCITY = 10;
+    public static final short BULLET_BIT = 8;
+    public static final int BULLET_WIDTH = 15;
+    public static final int BULLET_HEIGHT = 45;
+
 }
