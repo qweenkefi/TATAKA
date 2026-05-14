@@ -11,14 +11,14 @@ import static com.mygdx.game.GameSettings.SRC_HEIGHT;
 import static com.mygdx.game.GameSettings.SRC_WIDTH;
 
 public class StumpObject {
-    int width = 1500;
-    int height = 700;
-    int speed = 13;
+    int width = 100;
+    int height =180;
+    int speed = 7;
     Texture textureDownTube;
     int gapX;
     int gapWeigh = 500;
     Random random;
-    int padding = 1;
+    int padding = 100;
     int distanceBetweenTubes;
     int x;
 
@@ -27,9 +27,9 @@ public class StumpObject {
         random = new Random();
         textureDownTube = new Texture(GameResources.NORMAL_STUMP_IMAGE);
 
-        gapX = gapWeigh + padding + random.nextInt(SRC_WIDTH - 2 * (padding + gapWeigh / 2));
-        distanceBetweenTubes = (SRC_WIDTH + width + random.nextInt(SRC_WIDTH + (padding + gapWeigh / 2))) / (stumpsCount - 1);
-        x = distanceBetweenTubes * stumpIdx + SRC_WIDTH;
+        gapX = gapWeigh + padding * 2 + random.nextInt(SRC_WIDTH * (padding + gapWeigh));
+        x = stumpIdx + SRC_WIDTH;
+
 
     }
 
@@ -44,16 +44,12 @@ public class StumpObject {
     public void move() {
         x -= speed;
         if (x < -width) {
-            x = SRC_WIDTH + distanceBetweenTubes;
+            x = SRC_WIDTH;
             gapX = gapWeigh + padding + random.nextInt(SRC_WIDTH - 2 * (padding + gapWeigh / 2));
         }
     }
 
     public boolean isHit(AnjeObject a) {
-//            if (anjeObject.y <= gapX - gapWeigh / 2 && anjeObject.x + anjeObject.width >= x && anjeObject.x <= x + width)
-//                return true;
-//            if (anjeObject.y + anjeObject.height >= gapX + gapWeigh / 2 && anjeObject.x + anjeObject.width >= x && anjeObject.x <= x + width)
-//                return true;
 
         if (a.x >= x && a.x <= x + width && a.y >= 0 && a.y <= height) {
             return true;
