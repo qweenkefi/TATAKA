@@ -47,8 +47,4 @@ public class MemoryManager { private static final Preferences preferences = Gdx.
     }
 
 
-
-
-
-
 }
