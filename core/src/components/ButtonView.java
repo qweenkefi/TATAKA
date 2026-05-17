@@ -31,7 +31,7 @@ public class ButtonView extends View {
         textY = y + (height + textHeight) / 2;
     }
 
-    public ButtonView(float x, float y, float width, float height, String texturePath) {
+    public ButtonView(float x, float y, float width, float height, BitmapFont commonBlackFont, String texturePath) {
         super(x, y, width, height);
         texture  = new Texture(texturePath);
     }

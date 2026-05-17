@@ -26,6 +26,7 @@ public class ScreenGame extends ScreenAdapter {
     StumpObject[] stumps;
     MonsterObject[] monsters;
     ArrayList<BulletObject> bullets;
+    ButtonView pauseButton;
     int stumpsCount = 3;
     int monstersCount = 3;
     int bulletsCount = 3;
@@ -41,8 +42,10 @@ public class ScreenGame extends ScreenAdapter {
         initMonsterObject();
         initBulletObject();
         bullets = new ArrayList<>();
-        pleeButtonView = new ButtonView(20, 300, 300, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "plee");
-        jumpButtonView = new ButtonView(20, 100, 300, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "jump");
+        pleeButtonView = new ButtonView(600, 100, 120, 200, myGdxGame.commonBlackFont, GameResources.ATTACK_BUTTON);
+        jumpButtonView = new ButtonView(20, 100, 120, 200, myGdxGame.commonBlackFont, GameResources.JUMP_BUTTON);
+
+        pauseButton = new ButtonView(590, 1120, 130, 130, myGdxGame.commonBlackFont, GameResources.PAUSE_IMG_PATH);
 
 
     }
@@ -113,6 +116,7 @@ public class ScreenGame extends ScreenAdapter {
         anjeObject.draw(myGdxGame.batch);
         pleeButtonView.draw(myGdxGame.batch);
         jumpButtonView.draw(myGdxGame.batch);
+        pauseButton.draw(myGdxGame.batch);
         for (int i = 0; i < stumpsCount; i++) {
             stumps[i].draw(myGdxGame.batch);
         }
@@ -124,6 +128,7 @@ public class ScreenGame extends ScreenAdapter {
         }
         myGdxGame.batch.end();
     }
+
 
     @Override
     public void resize(int width, int height) {

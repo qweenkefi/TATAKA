@@ -7,7 +7,11 @@ public class GameResources {
     public static final String BUTTON_PATH = "textures/images/button.png";
     public static final String BULLET_IMG_PATH = "textures/images/button.png";
     public static final String BLACKOUT_MIDDLE_IMG_PATH = "textures/images/blackout_middle.png";
+    public static final String BLACKOUT_FULL_IMG_PATH = "textures/images/blackout_full.png";
     public static final String NORMAL_STUMP_IMAGE = "objects/stump_object.png";
+    public static final String PAUSE_IMG_PATH = "textures/images/pauseButton.png";
+    public static final String ATTACK_BUTTON = "textures/images/attackButton.png";
+    public static final String JUMP_BUTTON = "textures/images/jumpButton.png";
     public static final String SHOOT_SOUND_PATH = "textures/sounds/beam.mp3";
     public static final String GAME_MUSIC_SOUND_PATH = "textures/sounds/TATAKA.mp3";
     public static final String FONT_PATH = "textures/fonts/ofont.ru_Satyr SP.ttf";
