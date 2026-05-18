@@ -22,6 +22,8 @@ public class ScreenMenu extends ScreenAdapter {
     ButtonView startButtonView;
     ButtonView settingsButtonView;
     ButtonView exitButtonView;
+    MovingBackground settingsBackground;
+
 
     public ScreenMenu(MyGdxGame myGdxGame){
         this.myGdxGame = myGdxGame;

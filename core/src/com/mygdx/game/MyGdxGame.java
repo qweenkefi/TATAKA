@@ -45,7 +45,7 @@ public class MyGdxGame extends Game {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, SRC_WIDTH, SRC_HEIGHT);
-		commonWhiteFont = FontBuilder.generate(30, Color.WHITE, GameResources.FONT_PATH);
+		commonWhiteFont = FontBuilder.generate(48, Color.WHITE, GameResources.FONT_PATH);
 		commonBlackFont = FontBuilder.generate(55, Color.BLACK, GameResources.FONT_PATH);
 		largeWhiteFont = FontBuilder.generate(48, Color.WHITE, GameResources.FONT_PATH);
 

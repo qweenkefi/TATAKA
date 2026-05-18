@@ -23,17 +23,17 @@ public class SettingsScreen extends ScreenAdapter {
     ButtonView returnButton;
     TextView musicSettingView;
     TextView soundSettingView;
-    TextView clearSettingView;
+    TextView clearSettingView;;
     private String translateStateToText(boolean state) {
         return state ? "ON" : "OFF";
     }
 
 public SettingsScreen(MyGdxGame myGdxGame) {
     this.myGdxGame = myGdxGame;
-    backgroundView = new MovingBackground(GameResources.BACKGROUND_MENU);
+    backgroundView = new MovingBackground(GameResources.SETTINGS_BACKGROUND);
 
     titleTextView = new TextView(myGdxGame.largeWhiteFont, 256, 956, "Settings");
-    blackoutImageView = new ImageView(85, 365, GameResources.BLACKOUT_MIDDLE_IMG_PATH);
+    blackoutImageView = new ImageView(0, 380, GameResources.BLACKOUT_FULL_IMG_PATH);
     clearSettingView = new TextView(myGdxGame.commonWhiteFont, 173, 640, "clear records");
     musicSettingView = new TextView(
             myGdxGame.commonWhiteFont,
@@ -54,6 +54,7 @@ public SettingsScreen(MyGdxGame myGdxGame) {
             GameResources.BUTTON_PATH,
             "return"
     );
+
 }
 public void render(float delta) {
     handleInput();
@@ -64,11 +65,12 @@ public void render(float delta) {
     myGdxGame.batch.begin();
 
     backgroundView.draw(myGdxGame.batch);
-    titleTextView.draw(myGdxGame.batch);
+
     blackoutImageView.draw(myGdxGame.batch);
     returnButton.draw(myGdxGame.batch);
     musicSettingView.draw(myGdxGame.batch);
     soundSettingView.draw(myGdxGame.batch);
+    titleTextView.draw(myGdxGame.batch);
     clearSettingView.draw(myGdxGame.batch);
 
     myGdxGame.batch.end();
