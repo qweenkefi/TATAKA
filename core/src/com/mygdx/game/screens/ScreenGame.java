@@ -40,7 +40,7 @@ public class ScreenGame extends ScreenAdapter {
     ButtonView continueButton;
     TextView pauseTextView;
     GameSession gameSession;
-    ImageView fullBlackoutView;
+    MovingBackground settingsBackground;
 
     public ScreenGame(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
@@ -69,7 +69,7 @@ public class ScreenGame extends ScreenAdapter {
         );
         pauseButton = new ButtonView(590, 1120, 130, 130, myGdxGame.commonBlackFont, GameResources.PAUSE_IMG_PATH);
         pauseTextView = new TextView(myGdxGame.largeWhiteFont, 282, 842, "Pause");
-        fullBlackoutView = new ImageView(0, 0, GameResources.BLACKOUT_FULL_IMG_PATH);
+        settingsBackground = new MovingBackground( GameResources.SETTINGS_BACKGROUND);
 
 
     }
@@ -179,14 +179,14 @@ public class ScreenGame extends ScreenAdapter {
         }
 
         if (gameSession.state == GameState.PAUSED) {
-            fullBlackoutView.draw(myGdxGame.batch);
+            settingsBackground.draw(myGdxGame.batch);
             pauseTextView.draw(myGdxGame.batch);
             homeButton.draw(myGdxGame.batch);
             continueButton.draw(myGdxGame.batch);
 
         }
         else if (gameSession.state == GameState.ENDED) {
-            fullBlackoutView.draw(myGdxGame.batch);
+            settingsBackground.draw(myGdxGame.batch);
             //recordsTextView.draw(myGdxGame.batch);
             //recordsListView.draw(myGdxGame.batch);
             homeButton.draw(myGdxGame.batch);
