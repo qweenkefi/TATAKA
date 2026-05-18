@@ -103,29 +103,33 @@ public class ScreenGame extends ScreenAdapter {
                 bullets.add(bo);
             }
             if (jumpButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                anjeObject.onClick();
+                //anjeObject.onClick();
             }
         }
     }
 
     @Override
-    public void show() {
-        this.anjeObject = new AnjeObject(1, 50, 10);
-        restartGame();
-    }
+    public void show() {restartGame();}
 
     @Override
     public void render(float delta) {
         handleInput();
-        if (gameSession.state == GameState.PLAYING){
+        if (gameSession.state == GameState.PLAYING) {
+                AnjeObject trashObject = new AnjeObject(
+                        GameS ettings.TRASH_WIDTH, GameSettings.TRASH_HEIGHT,
+                        GameResources.TRASH_IMG_PATH,
+                        myGdxGame.world
+                );
 
-        for (StumpObject stump : stumps) {
-            stump.move();
-            if (stump.isHit(anjeObject)) {
-                System.out.println("HIT");
-                isGameOver = true;
+                trashArray.add(anjeObject);
+
+            if (gameSession.getLvl() == 0 && gameSession.shouldSpawnBoss()) {
+                boss = new Boss(
+                        GameSettings.BOSS_WIDTH, GameSettings.BOSS_HEIGHT,
+                        GameResources.TRASH_IMG_PATH,
+                        myGdxGame.world);
+                gameSession.upLvl();
             }
-        }
 
 
         for (MonsterObject monster : monsters) {

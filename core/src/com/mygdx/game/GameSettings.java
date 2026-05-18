@@ -11,7 +11,6 @@ public class GameSettings {
     public static final float GROUND_HEIGHT = 2f;
     public static final int VELOCITY_ITERATIONS = 6;
     public static final int POSITION_ITERATIONS = 6;
-    public static final short STUMP_BIT = 1;
     public static final int ANJE_WIDTH = 100;
     public static final int ANJE_HEIGHT = 250;
     public static final int LIK_WIDTH = 100;
@@ -20,5 +19,7 @@ public class GameSettings {
     public static final short BULLET_BIT = 8;
     public static final int BULLET_WIDTH = 15;
     public static final int BULLET_HEIGHT = 45;
+    public static final int MAX_HEIGHT_OF_JUMP = 400;
+    public static final short STUMP_BIT = 2;
 
 }

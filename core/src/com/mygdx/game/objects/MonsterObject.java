@@ -1,58 +1,23 @@
 package com.mygdx.game.objects;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
+
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.GameResources;
+import com.mygdx.game.GameSettings;
 
-import java.util.Random;
-
-import static com.mygdx.game.GameSettings.SRC_WIDTH;
+import static com.badlogic.gdx.math.MathUtils.random;
 
 public class MonsterObject extends StumpObject {
 
-    int width = 150;
-    int height =200;
-    int speed = 7;
-    Random random;
-    int padding = 100;
-    int x;
-    int y = 300;
-    Texture textureMonster;
 
-    public MonsterObject(int stumpsCount, int stumpIdx, World world) {
-        super(stumpsCount, stumpIdx, world);
+    private static final int padding = 30;
 
-        random = new Random();
-        textureMonster = new Texture(GameResources.NORMAL_STUMP_IMAGE);
+    private int livesLeft;
 
-        gapX = (gapWeigh + padding) * 2 + random.nextInt(SRC_WIDTH * (padding + gapWeigh));
-        x = stumpIdx + SRC_WIDTH;
+    MonsterObject(String texturePath, int width, int height, int x, int y, short cBits, World world) {
+        super(texturePath, 100, 100, x , y, GameSettings.STUMP_BIT, world);
+
+        body.setLinearVelocity(new Vector2(width + GameSettings.SRC_WIDTH + padding + random(700),0)) ;
+        livesLeft = 1;
     }
-
-    public void draw(Batch batch) {
-        batch.draw(textureStump, x, y, width, height);
-    }
-
-    public void dispose() {
-        textureStump.dispose();
-    }
-
-    public void move() {
-        x -= speed;
-        if (x < -width) {
-            x = SRC_WIDTH;
-            gapX = gapWeigh + padding + random.nextInt(SRC_WIDTH - 2 * (padding + gapWeigh / 2));
-        }
-    }
-
-
-    public boolean isHit(AnjeObject a) {
-
-        if (a.x + width >= x && a.x <= x + width && a.y + height >= y && a.y <= y+ height) {
-            return true;
-        }
-        return false;
-    }
-
 }

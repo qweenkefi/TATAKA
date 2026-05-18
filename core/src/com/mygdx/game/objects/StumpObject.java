@@ -1,59 +1,23 @@
 package com.mygdx.game.objects;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
+
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.GameResources;
+import com.mygdx.game.GameSettings;
 
-import java.util.Random;
+import static com.badlogic.gdx.math.MathUtils.random;
 
-import static com.mygdx.game.GameSettings.SRC_HEIGHT;
-import static com.mygdx.game.GameSettings.SRC_WIDTH;
+public class StumpObject extends GameObject {
 
-public class StumpObject {
-    int width = 100;
-    int height =180;
-    int speed = 7;
-    Texture textureStump;
-    int gapX;
-    int gapWeigh = 500;
-    Random random;
-    int padding = 100;
-    int x;
+    private static final int padding = 30;
 
-    public StumpObject(int stumpsCount, int stumpIdx, World world) {
+    private int livesLeft;
 
-        random = new Random();
-        textureStump = new Texture(GameResources.NORMAL_STUMP_IMAGE);
+    StumpObject(String texturePath, int width, int height, int x, int y, short cBits, World world) {
+        super(
+                texturePath, 100, 100, x , y, GameSettings.STUMP_BIT, world);
 
-        gapX = gapWeigh + padding * 2 + random.nextInt(SRC_WIDTH * (padding + gapWeigh));
-        x = stumpIdx + SRC_WIDTH;
-
-
+        body.setLinearVelocity(new Vector2(width + GameSettings.SRC_WIDTH + padding + random(700),0)) ;
+        livesLeft = 1;
     }
-
-    public void draw(Batch batch) {
-        batch.draw(textureStump, x, 0, width, height);
-    }
-
-    public void dispose() {
-        textureStump.dispose();
-    }
-
-    public void move() {
-        x -= speed;
-        if (x < -width) {
-            x = SRC_WIDTH;
-            gapX = gapWeigh + padding + random.nextInt(SRC_WIDTH - 2 * (padding + gapWeigh / 2));
-        }
-    }
-
-    public boolean isHit(AnjeObject a) {
-
-        if (a.x >= x && a.x <= x + width && a.y >= 0 && a.y <= height) {
-            return true;
-        }
-        return false;
-    }
-
 }
