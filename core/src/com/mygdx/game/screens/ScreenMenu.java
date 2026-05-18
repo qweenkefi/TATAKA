@@ -22,7 +22,7 @@ public class ScreenMenu extends ScreenAdapter {
     ButtonView startButtonView;
     ButtonView settingsButtonView;
     ButtonView exitButtonView;
-    MovingBackground settingsBackground;
+    ButtonView storyButtonView;
 
 
     public ScreenMenu(MyGdxGame myGdxGame){
@@ -31,7 +31,9 @@ public class ScreenMenu extends ScreenAdapter {
         float centerX = (GameSettings.SRC_WIDTH * 2)/7  ;
         startButtonView = new ButtonView(centerX, 600, 300, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Start");
         settingsButtonView = new ButtonView(centerX, 400, 300, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Settings");
-        exitButtonView = new ButtonView(centerX, 200, 300, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Exit");
+        exitButtonView = new ButtonView(centerX, 0, 300, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "Exit");
+        storyButtonView = new ButtonView(centerX, 200, 300, 200, myGdxGame.commonBlackFont, GameResources.BUTTON_PATH, "What?");
+
 
 
 
@@ -51,6 +53,7 @@ public class ScreenMenu extends ScreenAdapter {
         myGdxGame.batch.begin();
         background.draw(myGdxGame.batch);
         exitButtonView.draw(myGdxGame.batch);
+        storyButtonView.draw(myGdxGame.batch);
         settingsButtonView.draw(myGdxGame.batch);
         startButtonView.draw(myGdxGame.batch);
 
@@ -68,6 +71,8 @@ public class ScreenMenu extends ScreenAdapter {
             }
             if (settingsButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                 myGdxGame.setScreen(myGdxGame.settingsScreen);
+            }if (storyButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
+                myGdxGame.setScreen(myGdxGame.storyScreen);
             }}
 }
 

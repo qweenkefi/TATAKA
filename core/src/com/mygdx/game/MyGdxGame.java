@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.screens.ScreenGame;
 import com.mygdx.game.screens.ScreenMenu;
 import com.mygdx.game.screens.SettingsScreen;
+import com.mygdx.game.screens.StoryScreen;
 import components.FontBuilder;
 import managers.AudioManager;
 
@@ -26,6 +27,7 @@ public class MyGdxGame extends Game {
 	public ScreenGame screenGame;
 	public ScreenMenu screenMenu;
 	public SettingsScreen settingsScreen;
+	public StoryScreen storyScreen;
 	public BitmapFont commonWhiteFont;
 	public BitmapFont largeWhiteFont;
 	public BitmapFont commonBlackFont;
@@ -54,6 +56,7 @@ public class MyGdxGame extends Game {
 		screenMenu = new ScreenMenu(this);
 		screenGame = new ScreenGame(this);
 		settingsScreen = new SettingsScreen(this);
+		storyScreen = new StoryScreen(this);
 		setScreen(screenMenu);
 	}
 

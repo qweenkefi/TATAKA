@@ -17,4 +17,6 @@ public class GameResources {
     public static final String GAME_MUSIC_SOUND_PATH = "textures/sounds/TATAKA.mp3";
     public static final String FONT_PATH = "textures/fonts/ofont.ru_Satyr SP.ttf";
 
+    //story:
+    public static final String FIRST_PICTURE = "textures/storyPictures/storyFirst.png";
 }
