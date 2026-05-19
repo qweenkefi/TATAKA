@@ -1,5 +1,6 @@
 package com.mygdx.game.objects;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -11,11 +12,18 @@ public class AnjeObject extends GameObject {
 
 
     int livesLeft;
+    Texture[] framesArray;
+    int frameCounter = 0;
 
-    AnjeObject(String texturePath, int width, int height, int x, int y, short cBits, World world) {
-        super(texturePath, width, height, x, y, cBits, world);
+    public AnjeObject(int width, int height, int x, int y, short cBits, World world) {
+        super(width, height, x, y, cBits, world);
         body.setLinearDamping(10);
         livesLeft = 3;
+
+        framesArray = new Texture[]{
+                new Texture("AnjeSprites/Anje0.png"),
+                new Texture("AnjeSprites/Anje1.png"),
+        };
     }
 
     public int getLiveLeft() {
@@ -24,14 +32,20 @@ public class AnjeObject extends GameObject {
 
     @Override
     public void draw(SpriteBatch batch) {
-        putInFrame();
-        super.draw(batch);
+//        putInFrame();
+        int frameMultiplier = 10;
+        int x = getX();
+        int y = getY();
+        System.out.println("x - " + x + "y - " + y);
+        batch.draw(framesArray[frameCounter/frameMultiplier], x, y, width, height);
+        if (frameCounter++ == framesArray.length * frameMultiplier - 1) frameCounter = 0;
+
     }
 
     public void move () {
-        body.applyForceToCenter((new Vector2(0 , 0,
-                true
-        )));
+
+        body.applyForceToCenter(0, 200, true);
+
     }
 
     private void putInFrame() {
@@ -49,10 +63,7 @@ public class AnjeObject extends GameObject {
         }
     }
 
-//    public void onClick(){
-//        jump = true;
-//        jumpHeight = GameSettings.MAX_HEIGHT_OF_JUMP + y;
-//    }
+
 
     @Override
     public void hit() {

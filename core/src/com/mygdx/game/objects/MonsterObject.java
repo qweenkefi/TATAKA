@@ -17,7 +17,18 @@ public class MonsterObject extends StumpObject {
     MonsterObject(String texturePath, int width, int height, int x, int y, short cBits, World world) {
         super(texturePath, 100, 100, x , y, GameSettings.STUMP_BIT, world);
 
-        body.setLinearVelocity(new Vector2(width + GameSettings.SRC_WIDTH + padding + random(700),0)) ;
+        body.setLinearVelocity(new Vector2(-(width + GameSettings.SRC_WIDTH + padding + random(700)),0)) ;
         livesLeft = 1;
     }
+    public boolean isAlive() { return livesLeft > 0; }
+
+    public boolean isInFrame() {
+        return getY() + height / 2 > 0;
+    }
+
+    @Override
+    public void hit() {
+        livesLeft -= 1;
+    }
+
 }

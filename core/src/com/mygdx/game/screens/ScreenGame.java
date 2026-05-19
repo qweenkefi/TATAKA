@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.GameResources;
+import com.mygdx.game.GameSession;
 import com.mygdx.game.GameSettings;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.objects.AnjeObject;
@@ -13,7 +14,6 @@ import com.mygdx.game.objects.BulletObject;
 import com.mygdx.game.objects.MonsterObject;
 import com.mygdx.game.objects.StumpObject;
 import components.ButtonView;
-import components.ImageView;
 import components.MovingBackground;
 import components.TextView;
 
@@ -26,8 +26,9 @@ public class ScreenGame extends ScreenAdapter {
     MyGdxGame myGdxGame;
     boolean isGameOver;
     AnjeObject anjeObject;
-    StumpObject[] stumps;
-    MonsterObject[] monsters;
+    StumpObject stumpObject;
+    ArrayList<MonsterObject> monsters;
+    ArrayList<StumpObject> stumps;
     ArrayList<BulletObject> bullets;
     ButtonView pauseButton;
     int stumpsCount = 3;
@@ -51,6 +52,8 @@ public class ScreenGame extends ScreenAdapter {
         initMonsterObject();
         initBulletObject();
         bullets = new ArrayList<>();
+        stumps = new ArrayList<>();
+        monsters = new ArrayList<>();
         pleeButtonView = new ButtonView(600, 100, 120, 200, myGdxGame.commonBlackFont, GameResources.ATTACK_BUTTON);
         jumpButtonView = new ButtonView(20, 100, 120, 200, myGdxGame.commonBlackFont, GameResources.JUMP_BUTTON);
         homeButton = new ButtonView(
@@ -69,19 +72,16 @@ public class ScreenGame extends ScreenAdapter {
         );
         pauseButton = new ButtonView(590, 1120, 130, 130, myGdxGame.commonBlackFont, GameResources.PAUSE_IMG_PATH);
         pauseTextView = new TextView(myGdxGame.largeWhiteFont, 282, 842, "Pause");
-        settingsBackground = new MovingBackground( GameResources.SETTINGS_BACKGROUND);
-
-
+        settingsBackground = new MovingBackground(GameResources.SETTINGS_BACKGROUND);
     }
 
     private void handleInput() {
         if (Gdx.input.justTouched()) {
             myGdxGame.touch = myGdxGame.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            switch (gameSession.state){
+            switch (gameSession.state) {
                 case PLAYING:
                     if (pauseButton.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                         gameSession.pauseGame();
-
                     }
                 case PAUSED:
                     if (continueButton.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
@@ -103,82 +103,71 @@ public class ScreenGame extends ScreenAdapter {
                 bullets.add(bo);
             }
             if (jumpButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                //anjeObject.onClick();
+                anjeObject.move();
             }
         }
     }
 
     @Override
-    public void show() {restartGame();}
+    public void show() {
+        restartGame();
+    }
 
     @Override
     public void render(float delta) {
         handleInput();
         if (gameSession.state == GameState.PLAYING) {
-                AnjeObject trashObject = new AnjeObject(
-                        GameS ettings.TRASH_WIDTH, GameSettings.TRASH_HEIGHT,
-                        GameResources.TRASH_IMG_PATH,
-                        myGdxGame.world
+            if (gameSession.shouldSpawnStump()) {
+                stumpObject = new StumpObject(
+                        GameResources.STUMP_IMG_PATH,GameSettings.STUMP_WIDTH, GameSettings.STUMP_HEIGHT,
+                        1080, 0, GameSettings.STUMP_BIT, myGdxGame.world
                 );
 
-                trashArray.add(anjeObject);
-
-            if (gameSession.getLvl() == 0 && gameSession.shouldSpawnBoss()) {
-                boss = new Boss(
-                        GameSettings.BOSS_WIDTH, GameSettings.BOSS_HEIGHT,
-                        GameResources.TRASH_IMG_PATH,
-                        myGdxGame.world);
-                gameSession.upLvl();
+                stumps.add(stumpObject);
             }
 
-
-        for (MonsterObject monster : monsters) {
-            monster.move();
-        }
-        for (int i = 0; i < bullets.size(); i++) {
-            BulletObject bullet = bullets.get(i);
-            bullet.move();
-            for (int j = 0; j < monsters.length; j++) {
-                MonsterObject monster = monsters[j];
-                if (bullet.isHit(monster)) {
-                    System.out.println("HIT MONSTER");
-                    isGameOver = true;
-                    bullets.remove(i--);
-                    bullet.dispose();
-                    monsters[i] = null;
-                    monsters[i].dispose();
-                }
+            for (int i = 0; i < bullets.size(); i++) {
+                BulletObject bullet = bullets.get(i);
+                bullet.move();
+//                for (int j = 0; j < monsters.size(); j++) {
+//                    MonsterObject monster = monsters.get(i);
+                    if (bullet.wasHit) {
+                        System.out.println("HIT MONSTER");
+                        isGameOver = true;
+                        bullets.remove(i--);
+                        bullet.dispose();
+//                        monster.dispose();
+                    }
+//                }
             }
+
+            background.move();
+            updateStumps();
+            myGdxGame.stepWorld();
         }
-
-        background.move();
-        anjeObject.run();
-
-
-
-
-
-    }
         draw();
     }
-    private void draw(){
+
+    private void draw() {
         myGdxGame.camera.update();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
         ScreenUtils.clear(Color.CLEAR);
 
         myGdxGame.batch.begin();
         background.draw(myGdxGame.batch);
-        anjeObject.draw(myGdxGame.batch);
         pleeButtonView.draw(myGdxGame.batch);
         jumpButtonView.draw(myGdxGame.batch);
         pauseButton.draw(myGdxGame.batch);
-        for (int i = 0; i < stumpsCount; i++) {
-            stumps[i].draw(myGdxGame.batch);
+
+        anjeObject.draw(myGdxGame.batch);
+
+        for (StumpObject s : stumps) {
+            s.draw(myGdxGame.batch);
         }
-        for (int i = 0; i < monstersCount; i++) {
-            monsters[i].draw(myGdxGame.batch);
+        for (MonsterObject m : monsters) {
+            m.draw(myGdxGame.batch);
         }
-        for (BulletObject b: bullets) {
+        for (BulletObject b : bullets) {
             b.draw(myGdxGame.batch);
         }
 
@@ -188,8 +177,7 @@ public class ScreenGame extends ScreenAdapter {
             homeButton.draw(myGdxGame.batch);
             continueButton.draw(myGdxGame.batch);
 
-        }
-        else if (gameSession.state == GameState.ENDED) {
+        } else if (gameSession.state == GameState.ENDED) {
             settingsBackground.draw(myGdxGame.batch);
             //recordsTextView.draw(myGdxGame.batch);
             //recordsListView.draw(myGdxGame.batch);
@@ -199,6 +187,18 @@ public class ScreenGame extends ScreenAdapter {
 
     }
 
+    private void updateStumps() {
+        boolean hasToBeDestroyed = false;
+        for (int i = 0; i < stumps.size(); i++) {
+
+            hasToBeDestroyed = !stumps.get(i).isAlive() || !stumps.get(i).isInFrame();
+
+            if (hasToBeDestroyed) {
+                myGdxGame.world.destroyBody(stumps.get(i).body);
+                stumps.remove(i--);
+            }
+        }
+    }
 
     @Override
     public void resize(int width, int height) {
@@ -226,27 +226,26 @@ public class ScreenGame extends ScreenAdapter {
     }
 
     void initStumpObject() {
-        stumps = new StumpObject[stumpsCount];
-
-        for (int i = 0; i < stumpsCount; i++) {
-            stumps[i] = new StumpObject(stumpsCount, i, myGdxGame.world);
-        }
+        stumps = new ArrayList<>();
     }
 
     void initBulletObject() {
         bullets = new ArrayList<>();
-
     }
 
     void initMonsterObject() {
-        monsters = new MonsterObject[monstersCount];
-
-        for (int i = 0; i < stumpsCount; i++) {
-            monsters[i] = new MonsterObject(monstersCount, i, myGdxGame.world);
-        }
+        monsters = new ArrayList<>();
     }
+
     private void restartGame() {
 
         gameSession.startGame();
+
+        anjeObject = new AnjeObject(
+                GameSettings.ANJE_WIDTH, GameSettings.ANJE_HEIGHT,
+                0, 0, GameSettings.ANJE_BIT,
+                myGdxGame.world
+
+        );
     }
 }
