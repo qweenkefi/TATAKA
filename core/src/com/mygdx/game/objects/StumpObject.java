@@ -1,35 +1,59 @@
 package com.mygdx.game.objects;
 
-
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.GameSettings;
+import com.mygdx.game.GameResources;
 
-import static com.badlogic.gdx.math.MathUtils.random;
+import java.util.Random;
 
-public class StumpObject extends GameObject {
+import static com.mygdx.game.GameSettings.SRC_HEIGHT;
+import static com.mygdx.game.GameSettings.SRC_WIDTH;
 
-    private static final int padding = 30;
+public class StumpObject {
+    int width = 100;
+    int height =180;
+    int speed = 7;
+    Texture textureStump;
+    int gapX;
+    int gapWeigh = 500;
+    Random random;
+    int padding = 100;
+    int x;
 
-    private int livesLeft;
+    public StumpObject(int stumpsCount, int stumpIdx, World world) {
 
-    public StumpObject(String texturePath, int width, int height, int x, int y, short cBits, World world) {
-        super(
-                texturePath, 100, 100, x , y, GameSettings.STUMP_BIT, world);
+        random = new Random();
+        textureStump = new Texture(GameResources.NORMAL_STUMP_IMAGE);
 
-        body.setLinearVelocity(new Vector2(-(width + GameSettings.SRC_WIDTH + padding + random(700)),0)) ;
-        livesLeft = 1;
+        gapX = gapWeigh + padding * 2 + random.nextInt(SRC_WIDTH * (padding + gapWeigh));
+        x = stumpIdx + SRC_WIDTH;
+
+
     }
 
-
-    public boolean isAlive() { return livesLeft > 0; }
-
-    public boolean isInFrame() {
-        return getY() + height / 2 > 0;
+    public void draw(Batch batch) {
+        batch.draw(textureStump, x, 0, width, height);
     }
 
-    @Override
-    public void hit() {
-        livesLeft -= 1;
+    public void dispose() {
+        textureStump.dispose();
     }
+
+    public void move() {
+        x -= speed;
+        if (x < -width) {
+            x = SRC_WIDTH;
+            gapX = gapWeigh + padding + random.nextInt(SRC_WIDTH - 2 * (padding + gapWeigh / 2));
+        }
+    }
+
+    public boolean isHit(AnjeObject a) {
+
+        if (a.x >= x && a.x <= x + width && a.y >= 0 && a.y <= height) {
+            return true;
+        }
+        return false;
+    }
+
 }

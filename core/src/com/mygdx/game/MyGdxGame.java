@@ -75,5 +75,4 @@ public class MyGdxGame extends Game {
 	}
 
 
-
 }

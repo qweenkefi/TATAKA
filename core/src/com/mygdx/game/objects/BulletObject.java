@@ -13,7 +13,7 @@ public class BulletObject extends GameObject {
     int speed = 20;
     Texture textureBullet;
     int x;
-    public boolean wasHit;
+    public boolean bulletRun;
 
 
     public BulletObject(int x, int y, int width, int height, String texturePath, World world) {
@@ -25,9 +25,9 @@ public class BulletObject extends GameObject {
     }
 
 
-//    public void draw (Batch batch){
-//        batch.draw(textureBullet, x, 0, width, height);
-//    }
+    public void draw (Batch batch){
+        batch.draw(textureBullet, x, 0, width, height);
+    }
 
     public void dispose () {
         textureBullet.dispose();
@@ -40,13 +40,10 @@ public class BulletObject extends GameObject {
     public void draw(SpriteBatch batch) {
         batch.draw(texture, x - (width / 2f), getY() - (height / 2f), width, height);
     }
-    public boolean hasToBeDestroyed() {
-        return wasHit || (getY() - height / 2 > GameSettings.SRC_HEIGHT);
-    }
-
-    @Override
-    public void hit() {
-        super.hit();
-        wasHit = true;
+    public boolean isHit(MonsterObject m) {
+        if (m.x >= x && m.x <= x + width && m.y >= 0 && m.y <= height) {
+            return true;
+        }
+        return false;
     }
 }

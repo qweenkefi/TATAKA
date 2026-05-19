@@ -21,13 +21,6 @@ public class GameObject {
         texture = new Texture(texturePath);
         body = createBody(x, y, world);
     }
-    GameObject(int width, int height,int x, int y, short cBits, World world){
-        this.width = width;
-        this.height = height;
-        this.cBits = cBits;
-
-        body = createBody(x, y, world);
-    }
     public void hit(){
 
     }
@@ -70,13 +63,11 @@ public class GameObject {
 
     }
     public void draw(SpriteBatch batch) {
-        if (texture != null){
-        batch.draw(texture, getX() - (width / 2f), getY() - (height / 2f), width, height);}
+        batch.draw(texture, getX() - (width / 2f), getY() - (height / 2f), width, height);
     }
 
     public void dispose(){
-        if (texture != null) {
-            texture.dispose();
-        }
+        texture.dispose();
+
     }
 }

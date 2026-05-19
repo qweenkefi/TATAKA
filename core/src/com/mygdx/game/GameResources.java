@@ -9,7 +9,7 @@ public class GameResources {
     public static final String BULLET_IMG_PATH = "textures/images/button.png";
     public static final String BLACKOUT_MIDDLE_IMG_PATH = "textures/images/blackout_middle.png";
     public static final String BLACKOUT_FULL_IMG_PATH = "textures/images/blackout_full.png";
-    public static final String STUMP_IMG_PATH = "objects/stump_object.png";
+    public static final String NORMAL_STUMP_IMAGE = "objects/stump_object.png";
     public static final String PAUSE_IMG_PATH = "textures/images/pauseButton.png";
     public static final String LIVE_IMAGE = "textures/images/life.png";
     public static final String ATTACK_BUTTON = "textures/images/attackButton.png";
