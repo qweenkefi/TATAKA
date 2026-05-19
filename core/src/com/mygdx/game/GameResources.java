@@ -11,6 +11,7 @@ public class GameResources {
     public static final String BLACKOUT_FULL_IMG_PATH = "textures/images/blackout_full.png";
     public static final String STUMP_IMG_PATH = "objects/stump_object.png";
     public static final String PAUSE_IMG_PATH = "textures/images/pauseButton.png";
+    public static final String LIVE_IMAGE = "textures/images/life.png";
     public static final String ATTACK_BUTTON = "textures/images/attackButton.png";
     public static final String JUMP_BUTTON = "textures/images/jumpButton.png";
     public static final String SHOOT_SOUND_PATH = "textures/sounds/beam.mp3";
@@ -19,4 +20,6 @@ public class GameResources {
 
     //story:
     public static final String FIRST_PICTURE = "textures/storyPictures/storyFirst.png";
+    public static final String SECOND_PICTURE = "textures/storyPictures/storySecond.png";
+    public static final String THIRD_PICTURE = "textures/storyPictures/storyThird.png";
 }
