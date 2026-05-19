@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class ButtonView extends View {
 
+    public boolean isHit;
     Texture texture;
     BitmapFont bitmapFont;
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import managers.MemoryManager;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameSession {
     private int score;
@@ -12,6 +13,10 @@ public class GameSession {
     long nextTrashSpawnTime;
     long sessionStartTime;
     long pauseStartTime;
+    long eventStartTime;
+    Random random = new Random();
+
+
 
     public void destructionRegistration() {
         destructedStumpsNumber += 1;
@@ -33,6 +38,21 @@ public class GameSession {
         score = 0;
         destructedStumpsNumber = 0;
         sessionStartTime = TimeUtils.millis();
+        eventStartTime = sessionStartTime + 1000L * (random.nextInt(3) + 1);
+
+
+    }
+    public boolean startEventIfNeed() {
+
+        System.out.println("ogo");
+        if(eventStartTime < TimeUtils.millis()){
+            System.out.println("da");
+
+
+           // Gdx.app.exit();
+        }
+        return false;
+
 
 
     }
