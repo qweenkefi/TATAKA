@@ -18,20 +18,28 @@ public class MonsterObject extends StumpObject {
     int padding = 100;
     int x;
     int y = 300;
-    Texture textureMonster;
+    Texture[] framesArray;
+    int frameCounter;
 
     public MonsterObject(int stumpsCount, int stumpIdx, World world) {
         super(stumpsCount, stumpIdx, world);
 
         random = new Random();
-        textureMonster = new Texture(GameResources.NORMAL_STUMP_IMAGE);
+        frameCounter = 0;
+        framesArray = new Texture[]{
+                new Texture("monster0.png"),
+                new Texture("monster1.png"),
+                new Texture("monster2.png"),
+        };
 
         gapX = (gapWeigh + padding) * 2 + random.nextInt(SRC_WIDTH * (padding + gapWeigh));
         x = stumpIdx + SRC_WIDTH;
     }
 
     public void draw(Batch batch) {
-        batch.draw(textureStump, x, y, width, height);
+        int frameMultiplier = 15;
+        batch.draw(framesArray[frameCounter/frameMultiplier],x,y,width,height);
+        if (frameCounter++ == framesArray.length * frameMultiplier - 1) frameCounter = 0;
     }
 
     public void dispose() {
@@ -45,7 +53,6 @@ public class MonsterObject extends StumpObject {
             gapX = gapWeigh + padding + random.nextInt(SRC_WIDTH - 2 * (padding + gapWeigh / 2));
         }
     }
-
 
     public boolean isHit(AnjeObject a) {
 

@@ -25,7 +25,7 @@ public class ScreenGame extends ScreenAdapter {
     AnjeObject anjeObject;
     StumpObject[] stumps;
     MonsterObject[] monsters;
-    ArrayList<BulletObject> bullets;
+    BulletObject[] bullets;
     ButtonView pauseButton;
     int stumpsCount = 3;
     int monstersCount = 3;
@@ -48,7 +48,6 @@ public class ScreenGame extends ScreenAdapter {
         initStumpObject();
         initMonsterObject();
         initBulletObject();
-        bullets = new ArrayList<>();
         pleeButtonView = new ButtonView(600, 100, 120, 200, myGdxGame.commonBlackFont, GameResources.ATTACK_BUTTON);
         jumpButtonView = new ButtonView(20, 100, 120, 200, myGdxGame.commonBlackFont, GameResources.JUMP_BUTTON);
         liveView = new LiveView(340, 1240, GameResources.LIVE_IMAGE);
@@ -94,13 +93,10 @@ public class ScreenGame extends ScreenAdapter {
             }
 
             if (pleeButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                BulletObject bo = new BulletObject(
-                        anjeObject.getX(), anjeObject.getY() + anjeObject.height / 2,
-                        GameSettings.BULLET_WIDTH, GameSettings.BULLET_HEIGHT,
-                        BULLET_IMG_PATH,
-                        myGdxGame.world
-                );
-                bullets.add(bo);
+                for (int i = 0; i < bullets.length; i++) {
+                    BulletObject bullet = bullets[i];
+                    bullet.move();
+                }
             }
             if (jumpButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                 anjeObject.onClick();
@@ -133,15 +129,15 @@ public class ScreenGame extends ScreenAdapter {
             for (MonsterObject monster : monsters) {
                 monster.move();
             }
-            for (int i = 0; i < bullets.size(); i++) {
-                BulletObject bullet = bullets.get(i);
+            for (int i = 0; i < bullets.length; i++) {
+                BulletObject bullet = bullets[i];
                 bullet.move();
                 for (int j = 0; j < monsters.length; j++) {
                     MonsterObject monster = monsters[j];
                     if (bullet.isHit(monster)) {
-                        System.out.println("HIT MONSTER");
+                        System.out.println("STRIKE MONSTER");
                         isGameOver = true;
-                        bullets.remove(i--);
+                        bullets[i].dispose();
                         bullet.dispose();
                         monsters[i] = null;
                         monsters[i].dispose();
@@ -232,8 +228,9 @@ public class ScreenGame extends ScreenAdapter {
     }
 
     void initBulletObject() {
-        bullets = new ArrayList<>();
-
+        for (int i = 0; i < bulletsCount; i++) {
+            bullets[i] = new BulletObject(bulletsCount, i, myGdxGame.world);
+        }
     }
 
     void initMonsterObject() {
