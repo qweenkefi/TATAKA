@@ -13,7 +13,7 @@ import static com.mygdx.game.GameSettings.SRC_WIDTH;
 public class StumpObject {
     int width = 100;
     int height =180;
-    int speed = 7;
+    int speed = 4;
     Texture textureStump;
     int gapX;
     int gapWeigh = 500;

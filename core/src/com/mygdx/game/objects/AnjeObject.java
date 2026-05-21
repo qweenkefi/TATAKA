@@ -14,6 +14,7 @@ public class AnjeObject {
     boolean jump;
     int frameCounter;
     Texture[] framesArray;
+    int livesLeft;
 
     public AnjeObject(int x, int y, int speed) {
         this.x = x;
@@ -22,6 +23,7 @@ public class AnjeObject {
         frameCounter = 0;
         this.width = 100;
         this.height = 250;
+        livesLeft = 3;
 
         framesArray = new Texture[]{
                 new Texture("AnjeSprites/Anje0.png"),
@@ -52,6 +54,15 @@ public class AnjeObject {
         int frameMultiplier = 15;
         batch.draw(framesArray[frameCounter/frameMultiplier],x,y,width,height);
         if (frameCounter++ == framesArray.length * frameMultiplier - 1) frameCounter = 0;
+    }
+
+    public void hit() {
+        livesLeft -= 1;
+    }
+
+    public int getLiveLeft() {
+
+        return livesLeft;
     }
 
     public int getX() {

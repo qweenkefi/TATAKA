@@ -13,7 +13,7 @@ public class MonsterObject extends StumpObject {
 
     int width = 150;
     int height =200;
-    int speed = 7;
+    int speed = 2;
     Random random;
     int padding = 100;
     int x;
