@@ -14,12 +14,13 @@ public class BulletObject {
     AnjeObject anjeObject;
     Texture textureBullet;
 
-public BulletObject(int x, int y, World world){
+public BulletObject(int x, int y){
 
-    this.x = 0;
-    this.y = 200;
-    this.speed = speed;
-    this.height = 25;
+    this.x = x;
+    this.y = y;
+    this.speed = 5;
+    this.width = 300;
+    this.height = 300;
     textureBullet = new Texture(GameResources.NORMAL_STUMP_IMAGE);
 
 }

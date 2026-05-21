@@ -14,14 +14,16 @@ import com.mygdx.game.objects.MonsterObject;
 import com.mygdx.game.objects.StumpObject;
 import components.*;
 
+import java.util.ArrayList;
+
 
 public class ScreenGame extends ScreenAdapter {
     MyGdxGame myGdxGame;
     boolean isGameOver;
     AnjeObject anjeObject;
     StumpObject[] stumps;
-    MonsterObject[] monsters;
-    BulletObject[] bullets;
+    ArrayList<MonsterObject> monsters;
+    ArrayList<BulletObject> bullets;
     ButtonView pauseButton;
     int stumpsCount = 3;
     int monstersCount = 3;
@@ -43,7 +45,7 @@ public class ScreenGame extends ScreenAdapter {
         gameSession = new GameSession();
         initStumpObject();
         initMonsterObject();
-        //initBulletObject();
+        bullets = new ArrayList<>();
         pleeButtonView = new ButtonView(600, 100, 120, 200, myGdxGame.commonBlackFont, GameResources.ATTACK_BUTTON);
         jumpButtonView = new ButtonView(20, 100, 120, 200, myGdxGame.commonBlackFont, GameResources.JUMP_BUTTON);
         liveView = new LiveView(340, 1240, GameResources.LIVE_IMAGE);
@@ -77,11 +79,10 @@ public class ScreenGame extends ScreenAdapter {
                         gameSession.pauseGame();
                     }
                     if (pleeButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                    for (int i = 0; i < bullets.length; i++) {
-                        BulletObject bullet = bullets[i];
-                        bullet.move();
+
+                        BulletObject bullet = new BulletObject(anjeObject.getX(), anjeObject.getY());
+                        bullets.add(bullet);
                     }
-                }
                     if (jumpButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                         anjeObject.onClick();
 
@@ -141,21 +142,21 @@ public class ScreenGame extends ScreenAdapter {
             for (MonsterObject monster : monsters) {
                 monster.move();
             }
-//            for (int i = 0; i < bullets.length; i++) {
-//                BulletObject bullet = bullets[i];
-//                bullet.move();
-//                for (int j = 0; j < monsters.length; j++) {
-//                    MonsterObject monster = monsters[j];
-//                    if (bullet.isHit(monster)) {
-//                        System.out.println("STRIKE MONSTER");
-//                        isGameOver = true;
-//                        bullets[i].dispose();
-//                        bullet.dispose();
-//                        monsters[i] = null;
-//                        monsters[i].dispose();
-//                    }
-//                }
-//            }
+            for (int i = 0; i < bullets.size(); i++) {
+                BulletObject bullet = bullets.get(i);
+                bullet.move();
+                for (int j = 0; j < monsters.size(); j++) {
+                    MonsterObject monster = monsters.get(j);
+                    if (bullet.isHit(monster)) {
+                        System.out.println("STRIKE MONSTER");
+                        isGameOver = true;
+                        bullet.dispose();
+                        bullets.remove(i--);
+                        break;
+                       // monsters.dispose();
+                    }
+                }
+            }
 
             background.move();
             anjeObject.run();
@@ -184,12 +185,12 @@ public class ScreenGame extends ScreenAdapter {
         for (int i = 0; i < stumpsCount; i++) {
             stumps[i].draw(myGdxGame.batch);
         }
-        for (int i = 0; i < monstersCount; i++) {
-            monsters[i].draw(myGdxGame.batch);
+        for (MonsterObject m : monsters) {
+            m.draw(myGdxGame.batch);
         }
-//        for (BulletObject b : bullets) {
-//            b.draw(myGdxGame.batch);
-//        }
+        for (BulletObject b : bullets) {
+            b.draw(myGdxGame.batch);
+        }
 
         if (gameSession.state == GameState.PAUSED) {
             settingsBackground.draw(myGdxGame.batch);
@@ -229,7 +230,7 @@ public class ScreenGame extends ScreenAdapter {
     @Override
     public void dispose() {
         background.dispose();
-      //  monsters.dispose();
+        //monsters.dispose();
 
     }
 
@@ -241,17 +242,11 @@ public class ScreenGame extends ScreenAdapter {
         }
     }
 
-//    void initBulletObject() {
-//        for (int i = 0; i < bulletsCount; i++) {
-//            bullets[i] = new BulletObject(bulletsCount, i, myGdxGame.world);
-//        }
-//    }
 
     void initMonsterObject() {
-        monsters = new MonsterObject[monstersCount];
-
-        for (int i = 0; i < stumpsCount; i++) {
-            monsters[i] = new MonsterObject(monstersCount, i, myGdxGame.world);
+        monsters = new ArrayList<>();
+        for (int i = 0; i < monstersCount; i++) {
+            monsters.add( new MonsterObject(monstersCount, i, myGdxGame.world));
         }
     }
 

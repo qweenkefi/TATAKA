@@ -42,9 +42,9 @@ public class MonsterObject extends StumpObject {
         if (frameCounter++ == framesArray.length * frameMultiplier - 1) frameCounter = 0;
     }
 
-    // public void dispose() {
-    //     textureMonster.dispose();
-    // }
+     public void dispose() {
+
+     }
 
     public void move() {
         x -= speed;
