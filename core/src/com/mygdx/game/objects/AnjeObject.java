@@ -23,7 +23,7 @@ public class AnjeObject {
         frameCounter = 0;
         this.width = 100;
         this.height = 250;
-        livesLeft = 3;
+        livesLeft = 2;
 
         framesArray = new Texture[]{
                 new Texture("AnjeSprites/Anje0.png"),
@@ -32,8 +32,10 @@ public class AnjeObject {
     }
 
     public void onClick(){
-        jump = true;
-        jumpHeight = maxHeightOfJump + y;
+        if(y<100) {
+            jump = true;
+            jumpHeight = maxHeightOfJump + y;
+        }
     }
 
     public void run(){
@@ -63,6 +65,10 @@ public class AnjeObject {
     public int getLiveLeft() {
 
         return livesLeft;
+    }
+
+    public boolean isAlive() {
+        return livesLeft > 0;
     }
 
     public int getX() {

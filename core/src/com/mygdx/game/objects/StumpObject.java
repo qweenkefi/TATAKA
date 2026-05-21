@@ -13,7 +13,7 @@ import static com.mygdx.game.GameSettings.SRC_WIDTH;
 public class StumpObject {
     int width = 100;
     int height =180;
-    int speed = 4;
+    int speed = 6;
     Texture textureStump;
     int gapX;
     int gapWeigh = 500;
@@ -26,7 +26,7 @@ public class StumpObject {
         random = new Random();
         textureStump = new Texture(GameResources.NORMAL_STUMP_IMAGE);
 
-        gapX = gapWeigh + padding * 2 + random.nextInt(SRC_WIDTH * (padding + gapWeigh));
+        gapX = gapWeigh + padding * 2 + random.nextInt(SRC_WIDTH * 3 * (padding + gapWeigh));
         x = stumpIdx + SRC_WIDTH;
 
 

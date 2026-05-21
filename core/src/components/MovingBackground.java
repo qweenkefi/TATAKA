@@ -44,7 +44,7 @@ public class MovingBackground {
         this.texture = texture;
     }
 
-    private void dispose() {
+    public void dispose() {
         texture.dispose();
     }
 }

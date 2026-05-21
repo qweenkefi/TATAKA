@@ -6,17 +6,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.GameResources;
-import com.mygdx.game.GameSettings;
+import com.mygdx.game.GameSession;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.objects.AnjeObject;
 import com.mygdx.game.objects.BulletObject;
 import com.mygdx.game.objects.MonsterObject;
 import com.mygdx.game.objects.StumpObject;
 import components.*;
-
-import java.util.ArrayList;
-
-import static com.mygdx.game.GameResources.BULLET_IMG_PATH;
 
 
 public class ScreenGame extends ScreenAdapter {
@@ -79,6 +75,15 @@ public class ScreenGame extends ScreenAdapter {
                 case PLAYING:
                     if (pauseButton.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                         gameSession.pauseGame();
+                    }
+                    if (pleeButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
+                    for (int i = 0; i < bullets.length; i++) {
+                        BulletObject bullet = bullets[i];
+                        bullet.move();
+                    }
+                }
+                    if (jumpButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
+                        anjeObject.onClick();
 
                     }
                     break;
@@ -86,20 +91,16 @@ public class ScreenGame extends ScreenAdapter {
                     if (continueButton.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                         gameSession.resumeGame();
                     }
-                    if ( homeButton.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
+                    if (homeButton.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                         myGdxGame.setScreen(myGdxGame.screenMenu);
                     }
 
-            }
+                case ENDED:
 
-            if (pleeButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                for (int i = 0; i < bullets.length; i++) {
-                    BulletObject bullet = bullets[i];
-                    bullet.move();
-                }
-            }
-            if (jumpButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                anjeObject.onClick();
+                    if (homeButton.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
+                        myGdxGame.setScreen(myGdxGame.screenMenu);
+                    }
+                    break;
             }
         }
     }
@@ -133,6 +134,9 @@ public class ScreenGame extends ScreenAdapter {
                 }
             }
 
+            if (!anjeObject.isAlive()) {
+                gameSession.endGame();
+            }
 
             for (MonsterObject monster : monsters) {
                 monster.move();
@@ -159,7 +163,9 @@ public class ScreenGame extends ScreenAdapter {
 
 
         }
+
         draw();
+
     }
 
     private void draw() {
@@ -193,8 +199,6 @@ public class ScreenGame extends ScreenAdapter {
 
         } else if (gameSession.state == GameState.ENDED) {
             settingsBackground.draw(myGdxGame.batch);
-            //recordsTextView.draw(myGdxGame.batch);
-            //recordsListView.draw(myGdxGame.batch);
             homeButton.draw(myGdxGame.batch);
         }
         myGdxGame.batch.end();
@@ -224,6 +228,8 @@ public class ScreenGame extends ScreenAdapter {
 
     @Override
     public void dispose() {
+        background.dispose();
+      //  monsters.dispose();
 
     }
 

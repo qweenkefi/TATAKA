@@ -1,16 +1,14 @@
-package com.mygdx.game.screens;
+package com.mygdx.game;
 
 import com.badlogic.gdx.utils.TimeUtils;
-import managers.MemoryManager;
+import com.mygdx.game.screens.GameState;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class GameSession {
     private int score;
     int destructedStumpsNumber;
     public GameState state;
-    long nextTrashSpawnTime;
     long sessionStartTime;
     long pauseStartTime;
     long eventStartTime;
@@ -65,16 +63,7 @@ public class GameSession {
     public void endGame() {
         updateScore();
         state = GameState.ENDED;
-        ArrayList<Integer> recordsTable = MemoryManager.loadRecordsTable();
-        if (recordsTable == null) {
-            recordsTable = new ArrayList<>();
-        }
-        int foundIdx = 0;
-        for (; foundIdx < recordsTable.size(); foundIdx++) {
-            if (recordsTable.get(foundIdx) < getScore()) break;
-        }
-        recordsTable.add(foundIdx, getScore());
-        MemoryManager.saveTableOfRecords(recordsTable);
+
 
     }
     public void pauseGame(){

@@ -21,8 +21,8 @@ public class MonsterObject extends StumpObject {
     Texture[] framesArray;
     int frameCounter;
 
-    public MonsterObject(int stumpsCount, int stumpIdx, World world) {
-        super(stumpsCount, stumpIdx, world);
+    public MonsterObject(int monstersCount, int monsterIdx, World world) {
+        super(monstersCount, monsterIdx, world);
 
         random = new Random();
         frameCounter = 0;
@@ -32,8 +32,8 @@ public class MonsterObject extends StumpObject {
                 new Texture("monster2.png"),
         };
 
-        gapX = (gapWeigh + padding) * 2 + random.nextInt(SRC_WIDTH * (padding + gapWeigh));
-        x = stumpIdx + SRC_WIDTH;
+        gapX = (gapWeigh + padding) * 3 + random.nextInt(SRC_WIDTH * (padding + gapWeigh));
+        x = monsterIdx + SRC_WIDTH;
     }
 
     public void draw(Batch batch) {
@@ -42,9 +42,9 @@ public class MonsterObject extends StumpObject {
         if (frameCounter++ == framesArray.length * frameMultiplier - 1) frameCounter = 0;
     }
 
-    public void dispose() {
-        textureStump.dispose();
-    }
+    // public void dispose() {
+    //     textureMonster.dispose();
+    // }
 
     public void move() {
         x -= speed;
