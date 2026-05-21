@@ -15,22 +15,25 @@ import components.TextView;
 
 public class StoryScreen extends ScreenAdapter {
     MyGdxGame myGdxGame;
-    MovingBackground firstPicture;
-    MovingBackground secondPicture;
-    MovingBackground thirdPicture;
+    ButtonView fisrtPicture;
+    ButtonView secondPicture;
+    ButtonView thirdPicture;
+    ButtonView fourthPicture;
     TextView firstPhrase;
     TextView secondPhrase;
     TextView ThirdPhrase;
-    ButtonView continueButtonView;
+
+    boolean needDrawSecPicture;
+    boolean needDrawThiPicture;
 
 
     public StoryScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        //firstPicture = new MovingBackground (GameResources.FIRST_PICTURE);
-        secondPicture = new MovingBackground (GameResources.SECOND_PICTURE);
-        thirdPicture = new MovingBackground (GameResources.THIRD_PICTURE);
-        continueButtonView = new ButtonView(-50, 0, 850, 1300, myGdxGame.commonBlackFont, GameResources.FIRST_PICTURE);
-        firstPhrase = new TextView(myGdxGame.largeWhiteFont, 5,1080, "This story has started many years ago.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n A lot before these children were born...");
+        fisrtPicture = new ButtonView(-50, 0, 850, 1300, myGdxGame.commonBlackFont, GameResources.FIRST_PICTURE);
+        secondPicture = new ButtonView(-50, 0, 850, 1300, myGdxGame.commonBlackFont, GameResources.SECOND_PICTURE);
+        thirdPicture = new ButtonView(-50, 0, 850, 1300, myGdxGame.commonBlackFont, GameResources.THIRD_PICTURE);
+
+        firstPhrase = new TextView(myGdxGame.largeWhiteFont, 5, 1080, "This story has started many years ago.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n A lot before these children were born...");
     }
 
 
@@ -40,32 +43,44 @@ public class StoryScreen extends ScreenAdapter {
         super.render(delta);
         draw();
     }
-    public void draw(){
+
+    public void draw() {
 
         myGdxGame.camera.update();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
         ScreenUtils.clear(Color.CLEAR);
         myGdxGame.batch.begin();
 
-        //firstPicture.draw(myGdxGame.batch);
-        continueButtonView.draw(myGdxGame.batch);
-
-        //thirdPicture.draw(myGdxGame.batch);
+        fisrtPicture.draw(myGdxGame.batch);
+        if (needDrawSecPicture) {
+            secondPicture.draw(myGdxGame.batch);
+        }
+        if (needDrawThiPicture) {
+            thirdPicture.draw(myGdxGame.batch);
+        }
         firstPhrase.draw(myGdxGame.batch);
         myGdxGame.batch.end();
 
     }
-    private void handleInput(){
+
+    private void handleInput() {
         if (Gdx.input.justTouched()) {
             myGdxGame.touch = myGdxGame.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if (continueButtonView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)){ScreenUtils.clear(Color.CLEAR);
-                thirdPicture.draw(myGdxGame.batch);
+            if (fisrtPicture.isHit(myGdxGame.touch.x, myGdxGame.touch.y) && !needDrawSecPicture) {
+                ScreenUtils.clear(Color.CLEAR);
+                needDrawSecPicture = true;
+                firstPhrase = new TextView(myGdxGame.largeWhiteFont, 5, 1080, "Prodo");
+            } else if (secondPicture.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
+                ScreenUtils.clear(Color.CLEAR);
+                needDrawThiPicture = true;
+                firstPhrase = new TextView(myGdxGame.largeWhiteFont, 5, 1080, "His race was ashamed of his sins");
+
 
             }
 
 
-            }}
-
+        }
+    }
 
 
     @Override
