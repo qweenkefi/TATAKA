@@ -21,7 +21,7 @@ public class StumpObject {
     int padding = 100;
     int x;
 
-    public StumpObject(int stumpsCount, int stumpIdx, World world) {
+    public StumpObject(int stumpsCount, int stumpIdx) {
 
         random = new Random();
         textureStump = new Texture(GameResources.NORMAL_STUMP_IMAGE);
@@ -51,6 +51,13 @@ public class StumpObject {
     public boolean isHit(AnjeObject a) {
 
         if (a.x >= x && a.x <= x + width && a.y >= 0 && a.y <= height) {
+            return true;
+        }
+        return false;
+    }
+    public boolean isHitLik(LikObject l) {
+
+        if (l.x + 200 >= x && l.x + 200 <= x + width && l.y >= 0 && l.y <= height) {
             return true;
         }
         return false;

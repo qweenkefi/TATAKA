@@ -8,10 +8,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.GameResources;
 import com.mygdx.game.GameSession;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.objects.AnjeObject;
-import com.mygdx.game.objects.BulletObject;
-import com.mygdx.game.objects.MonsterObject;
-import com.mygdx.game.objects.StumpObject;
+import com.mygdx.game.objects.*;
 import components.*;
 
 import java.util.ArrayList;
@@ -21,6 +18,7 @@ public class ScreenGame extends ScreenAdapter {
     MyGdxGame myGdxGame;
     boolean isGameOver;
     AnjeObject anjeObject;
+    LikObject likObject;
     StumpObject[] stumps;
     ArrayList<MonsterObject> monsters;
     ArrayList<BulletObject> bullets;
@@ -109,6 +107,7 @@ public class ScreenGame extends ScreenAdapter {
     @Override
     public void show() {
         this.anjeObject = new AnjeObject(1, 50, 10);
+        this.likObject = new LikObject(200, 50, 15);
         restartGame();
     }
 
@@ -125,7 +124,12 @@ public class ScreenGame extends ScreenAdapter {
                     System.out.println("HIT");
                     anjeObject.hit();
                 }
+                if (stump.isHitLik(likObject)) {
+                    System.out.println("Pam");
+                    likObject.onClick();
+                }
             }
+
 
             for (MonsterObject monster : monsters) {
                 monster.move();
@@ -160,6 +164,7 @@ public class ScreenGame extends ScreenAdapter {
 
             background.move();
             anjeObject.run();
+            likObject.run();
             liveView.setLeftLives(anjeObject.getLiveLeft());
 
 
@@ -177,6 +182,7 @@ public class ScreenGame extends ScreenAdapter {
         myGdxGame.batch.begin();
         background.draw(myGdxGame.batch);
         anjeObject.draw(myGdxGame.batch);
+        likObject.draw(myGdxGame.batch);
         pleeButtonView.draw(myGdxGame.batch);
         jumpButtonView.draw(myGdxGame.batch);
         pauseButton.draw(myGdxGame.batch);
@@ -238,7 +244,7 @@ public class ScreenGame extends ScreenAdapter {
         stumps = new StumpObject[stumpsCount];
 
         for (int i = 0; i < stumpsCount; i++) {
-            stumps[i] = new StumpObject(stumpsCount, i, myGdxGame.world);
+            stumps[i] = new StumpObject(stumpsCount, i);
         }
     }
 

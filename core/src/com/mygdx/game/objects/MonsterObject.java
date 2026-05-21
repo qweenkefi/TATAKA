@@ -22,7 +22,7 @@ public class MonsterObject extends StumpObject {
     int frameCounter;
 
     public MonsterObject(int monstersCount, int monsterIdx, World world) {
-        super(monstersCount, monsterIdx, world);
+        super(monstersCount, monsterIdx);
 
         random = new Random();
         frameCounter = 0;
